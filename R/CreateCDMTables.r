@@ -178,6 +178,7 @@ CreateCDMTables <- function (connectionDetails,cdmSchema,cdmVersion,githubTag = 
 	if (!is.null(githubTag) && githubTag == "v5.3.1_fixes") {
 		tableDDL <- SqlRender::render(sql = tableDDL, CDMDATABASESCHEMA = cdmSchema)
 	} else {
+		tableDDL <- gsub("NOT ULL", "NOT NULL", tableDDL)
 		tableDDL <- gsub("CREATE TABLE  \n", "CREATE TABLE ", tableDDL)
 		tableDDL <- gsub("CREATE TABLE ", "CREATE TABLE @CDM_SCHEMA.", tableDDL)
 		tableDDL <- gsub("CREATE TABLE @CDM_SCHEMA. ", "CREATE TABLE @CDM_SCHEMA.", tableDDL)
